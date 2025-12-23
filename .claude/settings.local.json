@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn clean install:*)",
+      "Bash(dir \"C:\\\\Development\\\\Code\\\\demo\\\\frontend\\\\dist\\\\frontend\")",
+      "Bash(dir \"C:\\\\Development\\\\Code\\\\demo\\\\backend\\\\target\\\\classes\\\\static\")",
+      "Bash(java:*)",
+      "Bash(timeout /t 8 /nobreak)",
+      "Bash(curl:*)",
+      "Bash(mvn clean package:*)",
+      "Bash(ping:*)",
+      "Bash(jar tf:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill /F /FI \"WINDOWTITLE eq Administrator:*java*\")",
+      "Bash(tasklist /FI \"IMAGENAME eq java.exe\" /FO TABLE)",
+      "Bash(cmd //c \"tasklist /FI \"\"IMAGENAME eq java.exe\"\" /FO TABLE\")",
+      "Bash(cmd //c \"taskkill /F /IM java.exe\")",
+      "Bash(dir:*)"
+    ]
+  }
+}

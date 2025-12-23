@@ -1,0 +1,434 @@
+<div class="container">
+  <div class="header">
+    <h1>Pokemon Collection</h1>
+    <p class="subtitle">Discover and catch them all!</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading Pokemons...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Controls Section -->
+  <div *ngIf="!loading && !error" class="controls">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        placeholder="Search pokemons by name, origin, powers, or tips..."
+        class="search-input"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="view-controls">
+      <button class="create-btn" (click)="openCreateModal()">
+        ➕ Create New Pokemon
+      </button>
+
+      <button class="toggle-btn" (click)="toggleView()">
+        <span *ngIf="viewMode === 'cards'">📊 Table View</span>
+        <span *ngIf="viewMode === 'table'">🎴 Card View</span>
+      </button>
+
+      <div *ngIf="viewMode === 'table'" class="column-selector">
+        <button class="column-toggle-btn">⚙️ Columns</button>
+        <div class="column-dropdown">
+          <label *ngFor="let col of columns" class="column-option">
+            <input
+              type="checkbox"
+              [checked]="col.visible"
+              (change)="toggleColumnVisibility(col)"
+            />
+            <span>{{ col.label }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards View -->
+  <div *ngIf="!loading && !error && viewMode === 'cards'" class="pokemon-grid">
+    <div *ngFor="let pokemon of filteredPokemons"
+         class="pokemon-card"
+         [style.border-color]="getCardColor(pokemon.strength)"
+         (click)="selectPokemon(pokemon)">
+      <div class="card-header" [style.background-color]="getCardColor(pokemon.strength)">
+        <span class="strength-badge">Strength: {{ pokemon.strength }}</span>
+      </div>
+      <div class="card-image">
+        <img [src]="pokemon.picture" [alt]="pokemon.name" />
+      </div>
+      <div class="card-body">
+        <h3 class="pokemon-name">{{ pokemon.name }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table View -->
+  <div *ngIf="!loading && !error && viewMode === 'table'" class="table-container">
+    <div class="table-wrapper">
+      <table class="pokemon-table">
+        <thead>
+          <tr>
+            <th
+              *ngFor="let col of columns"
+              [hidden]="!col.visible"
+              [style.width.px]="col.width"
+              [class.sortable]="col.sortable"
+              (click)="sort(col)"
+              draggable="true"
+              (dragstart)="onDragStart($event, col)"
+              (dragover)="onDragOver($event)"
+              (drop)="onDrop($event, col)"
+              class="table-header"
+            >
+              <div class="header-content">
+                <span class="header-label">{{ col.label }}</span>
+                <span class="sort-icon">{{ getSortIcon(col) }}</span>
+              </div>
+              <div
+                class="resize-handle"
+                (mousedown)="startResize($event, col)"
+                (click)="$event.stopPropagation()"
+              ></div>
+            </th>
+            <th class="actions-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let pokemon of filteredPokemons"
+            class="table-row"
+            [style.border-left]="'4px solid ' + getCardColor(pokemon.strength)"
+          >
+            <td *ngFor="let col of columns" [hidden]="!col.visible" class="table-cell">
+              <ng-container [ngSwitch]="col.key">
+                <span *ngSwitchCase="'strength'" class="strength-cell">
+                  <span
+                    class="strength-badge-table"
+                    [style.background-color]="getCardColor(pokemon.strength)"
+                  >
+                    {{ pokemon.strength }}
+                  </span>
+                  <span class="strength-label-table">{{ getStrengthLabel(pokemon.strength) }}</span>
+                </span>
+                <span *ngSwitchCase="'powers'" class="array-cell">
+                  {{ formatArrayValue(pokemon.powers) }}
+                </span>
+                <span *ngSwitchCase="'tips'" class="array-cell">
+                  {{ formatArrayValue(pokemon.tips) }}
+                </span>
+                <span *ngSwitchDefault>{{ pokemon[col.key] }}</span>
+              </ng-container>
+            </td>
+            <td class="actions-cell">
+              <button class="view-btn" (click)="selectPokemon(pokemon)">
+                👁️ View
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="filteredPokemons.length === 0" class="no-results">
+      <p>No pokemons found matching your search.</p>
+    </div>
+  </div>
+
+  <!-- Detail Panel -->
+  <div *ngIf="selectedPokemon" class="detail-overlay" (click)="closeDetail()">
+    <div class="detail-panel" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeDetail()">&times;</button>
+
+      <div class="detail-header" [style.background-color]="getCardColor(selectedPokemon.strength)">
+        <div class="detail-image">
+          <img [src]="selectedPokemon.picture" [alt]="selectedPokemon.name" />
+        </div>
+        <div class="detail-title">
+          <h2>{{ selectedPokemon.name }}</h2>
+          <div class="strength-indicator">
+            <span class="strength-value">{{ selectedPokemon.strength }}</span>
+            <span class="strength-text">{{ getStrengthLabel(selectedPokemon.strength) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-content">
+        <div class="detail-section">
+          <h3>Name Origin</h3>
+          <p class="explanation">{{ selectedPokemon.explanation }}</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>Powers & Abilities</h3>
+          <div class="powers-grid">
+            <span *ngFor="let power of selectedPokemon.powers" class="power-badge">
+              {{ power }}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Catching Tips</h3>
+          <ul class="tips-list">
+            <li *ngFor="let tip of selectedPokemon.tips">{{ tip }}</li>
+          </ul>
+        </div>
+
+        <div class="detail-actions">
+          <button class="edit-btn" (click)="openEditModal(selectedPokemon)">
+            ✏️ Edit Pokemon
+          </button>
+          <button class="delete-btn" (click)="deletePokemon(selectedPokemon)">
+            🗑️ Delete Pokemon
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Pokemon Modal -->
+  <div *ngIf="showCreateModal" class="detail-overlay" (click)="closeCreateModal()">
+    <div class="create-modal" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeCreateModal()">&times;</button>
+
+      <div class="modal-header">
+        <h2>Create New Pokemon</h2>
+        <p class="modal-subtitle">Fields marked with * are required</p>
+      </div>
+
+      <div class="modal-content">
+        <form class="create-form">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input
+              id="name"
+              type="text"
+              [(ngModel)]="newPokemon.name"
+              name="name"
+              placeholder="Enter Pokemon name"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="strength">Strength *</label>
+            <input
+              id="strength"
+              type="number"
+              [(ngModel)]="newPokemon.strength"
+              name="strength"
+              placeholder="Enter strength (0-100)"
+              min="0"
+              max="100"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="explanation">Name Origin</label>
+            <textarea
+              id="explanation"
+              [(ngModel)]="newPokemon.explanation"
+              name="explanation"
+              placeholder="Explain the origin of the name (optional)"
+              rows="3"
+              class="form-textarea"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="picture">Picture URL</label>
+            <input
+              id="picture"
+              type="url"
+              [(ngModel)]="newPokemon.picture"
+              name="picture"
+              placeholder="Enter image URL (optional)"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Powers & Abilities</label>
+            <div class="array-input">
+              <input
+                type="text"
+                [(ngModel)]="newPower"
+                name="newPower"
+                placeholder="Add a power"
+                class="form-input"
+                (keyup.enter)="addPower()"
+              />
+              <button type="button" class="add-btn" (click)="addPower()">Add</button>
+            </div>
+            <div class="tags-container" *ngIf="newPokemon.powers && newPokemon.powers.length > 0">
+              <span *ngFor="let power of newPokemon.powers; let i = index" class="tag">
+                {{ power }}
+                <button type="button" class="tag-remove" (click)="removePower(i)">&times;</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Catching Tips</label>
+            <div class="array-input">
+              <input
+                type="text"
+                [(ngModel)]="newTip"
+                name="newTip"
+                placeholder="Add a catching tip"
+                class="form-input"
+                (keyup.enter)="addTip()"
+              />
+              <button type="button" class="add-btn" (click)="addTip()">Add</button>
+            </div>
+            <div class="tags-container" *ngIf="newPokemon.tips && newPokemon.tips.length > 0">
+              <span *ngFor="let tip of newPokemon.tips; let i = index" class="tag">
+                {{ tip }}
+                <button type="button" class="tag-remove" (click)="removeTip(i)">&times;</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeCreateModal()">
+              Cancel
+            </button>
+            <button type="button" class="submit-btn" (click)="submitNewPokemon()">
+              Create Pokemon
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Pokemon Modal -->
+  <div *ngIf="showEditModal && editingPokemon" class="detail-overlay" (click)="closeEditModal()">
+    <div class="create-modal" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeEditModal()">&times;</button>
+
+      <div class="modal-header">
+        <h2>Edit Pokemon</h2>
+        <p class="modal-subtitle">Fields marked with * are required</p>
+      </div>
+
+      <div class="modal-content">
+        <form class="create-form">
+          <div class="form-group">
+            <label for="edit-name">Name *</label>
+            <input
+              id="edit-name"
+              type="text"
+              [(ngModel)]="editingPokemon.name"
+              name="edit-name"
+              placeholder="Enter Pokemon name"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-strength">Strength *</label>
+            <input
+              id="edit-strength"
+              type="number"
+              [(ngModel)]="editingPokemon.strength"
+              name="edit-strength"
+              placeholder="Enter strength (0-100)"
+              min="0"
+              max="100"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-explanation">Name Origin</label>
+            <textarea
+              id="edit-explanation"
+              [(ngModel)]="editingPokemon.explanation"
+              name="edit-explanation"
+              placeholder="Explain the origin of the name (optional)"
+              rows="3"
+              class="form-textarea"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-picture">Picture URL</label>
+            <input
+              id="edit-picture"
+              type="url"
+              [(ngModel)]="editingPokemon.picture"
+              name="edit-picture"
+              placeholder="Enter image URL (optional)"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Powers & Abilities</label>
+            <div class="array-input">
+              <input
+                type="text"
+                [(ngModel)]="editPower"
+                name="editPower"
+                placeholder="Add a power"
+                class="form-input"
+                (keyup.enter)="addEditPower()"
+              />
+              <button type="button" class="add-btn" (click)="addEditPower()">Add</button>
+            </div>
+            <div class="tags-container" *ngIf="editingPokemon.powers && editingPokemon.powers.length > 0">
+              <span *ngFor="let power of editingPokemon.powers; let i = index" class="tag">
+                {{ power }}
+                <button type="button" class="tag-remove" (click)="removeEditPower(i)">&times;</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Catching Tips</label>
+            <div class="array-input">
+              <input
+                type="text"
+                [(ngModel)]="editTip"
+                name="editTip"
+                placeholder="Add a catching tip"
+                class="form-input"
+                (keyup.enter)="addEditTip()"
+              />
+              <button type="button" class="add-btn" (click)="addEditTip()">Add</button>
+            </div>
+            <div class="tags-container" *ngIf="editingPokemon.tips && editingPokemon.tips.length > 0">
+              <span *ngFor="let tip of editingPokemon.tips; let i = index" class="tag">
+                {{ tip }}
+                <button type="button" class="tag-remove" (click)="removeEditTip(i)">&times;</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeEditModal()">
+              Cancel
+            </button>
+            <button type="button" class="submit-btn" (click)="submitEditPokemon()">
+              Update Pokemon
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
