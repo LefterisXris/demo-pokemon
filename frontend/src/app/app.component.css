@@ -1,411 +1,139 @@
+/* =============================================
+   MOBILE-FIRST RESPONSIVE DESIGN
+   Breakpoints:
+   - Base: 0-479px (small mobile)
+   - 480px: larger mobile
+   - 768px: tablet
+   - 1024px: laptop/small desktop
+   - 1400px: large desktop
+   ============================================= */
+
+/* =============================================
+   BASE STYLES (Mobile-first: small screens)
+   ============================================= */
+
+/* --- Container --- */
 .container {
   width: 100%;
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 16px 12px;
 }
 
+/* --- Header --- */
 .header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 24px;
 }
 
 h1 {
   color: white;
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 1.75rem;
+  margin-bottom: 6px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .subtitle {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1.3rem;
+  font-size: 1rem;
   margin: 0;
 }
 
+/* --- Loading --- */
 .loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 40px 16px;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(255, 255, 255, 0.3);
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
   border-top-color: white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
+/* --- Error --- */
 .error {
   text-align: center;
   color: #ffcccc;
   background: rgba(255, 0, 0, 0.2);
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
-.pokemon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.pokemon-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: 4px solid;
-  cursor: pointer;
-}
-
-.pokemon-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.card-header {
-  padding: 10px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-}
-
-.strength-badge {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  display: inline-block;
-}
-
-.card-image {
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-  padding: 20px;
+/* --- Controls Section --- */
+.controls {
+  margin: 0 auto 20px auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-}
-
-.card-image img {
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  transition: transform 0.3s;
-}
-
-.pokemon-card:hover .card-image img {
-  transform: scale(1.1);
-}
-
-.card-body {
-  padding: 20px;
-  text-align: center;
-  background: white;
-}
-
-.pokemon-name {
-  margin: 0;
-  color: #333;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-/* Detail Panel Styles */
-.detail-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 20px;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.detail-panel {
-  background: white;
-  border-radius: 20px;
-  max-width: 800px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  position: relative;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 28px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: background 0.3s, transform 0.2s;
-  line-height: 1;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
   padding: 0;
 }
 
-.close-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-  transform: rotate(90deg);
-}
-
-.detail-header {
-  padding: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  border-radius: 20px 20px 0 0;
-}
-
-.detail-image {
-  flex-shrink: 0;
-}
-
-.detail-image img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-}
-
-.detail-title {
-  flex: 1;
-}
-
-.detail-title h2 {
-  margin: 0 0 15px 0;
-  font-size: 3rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.strength-indicator {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.strength-value {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.strength-text {
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-.detail-content {
-  padding: 40px;
-}
-
-.detail-section {
-  margin-bottom: 30px;
-}
-
-.detail-section:last-child {
-  margin-bottom: 0;
-}
-
-.detail-section h3 {
-  color: #333;
-  font-size: 1.5rem;
-  margin: 0 0 15px 0;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.explanation {
-  color: #555;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0;
-  font-style: italic;
-}
-
-.powers-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.power-badge {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 500;
-  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.power-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
-}
-
-.tips-list {
-  margin: 0;
-  padding-left: 25px;
-}
-
-.tips-list li {
-  color: #555;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  margin-bottom: 10px;
-}
-
-.tips-list li:last-child {
-  margin-bottom: 0;
-}
-
-.tips-list li::marker {
-  color: #667eea;
-  font-weight: bold;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .detail-header {
-    flex-direction: column;
-    text-align: center;
-    padding: 30px 20px;
-  }
-
-  .detail-title h2 {
-    font-size: 2rem;
-  }
-
-  .detail-image img {
-    width: 150px;
-    height: 150px;
-  }
-
-  .detail-content {
-    padding: 20px;
-  }
-
-  .strength-indicator {
-    justify-content: center;
-  }
-}
-
-/* Controls Section */
-.controls {
-  max-width: 1400px;
-  margin: 0 auto 30px auto;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0 20px;
-}
-
 .search-box {
-  flex: 1;
-  min-width: 300px;
+  width: 100%;
   position: relative;
 }
 
 .search-input {
   width: 100%;
-  padding: 15px 50px 15px 20px;
+  padding: 14px 44px 14px 16px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 30px;
+  border-radius: 25px;
   background: rgba(255, 255, 255, 0.95);
-  font-size: 1rem;
+  font-size: 16px; /* Prevents iOS zoom on focus */
   transition: all 0.3s;
   outline: none;
 }
 
 .search-input:focus {
   border-color: #667eea;
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
   background: white;
 }
 
 .search-icon {
   position: absolute;
-  right: 20px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   pointer-events: none;
 }
 
 .view-controls {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .toggle-btn {
   background: white;
   color: #333;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 25px;
+  padding: 10px 16px;
   border-radius: 25px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-height: 44px; /* Touch target */
 }
 
 .toggle-btn:hover {
@@ -415,7 +143,28 @@ h1 {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-/* Column Selector */
+/* --- Create Button --- */
+.create-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  min-height: 44px; /* Touch target */
+  white-space: nowrap;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* --- Column Selector --- */
 .column-selector {
   position: relative;
 }
@@ -424,11 +173,12 @@ h1 {
   background: white;
   color: #333;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 20px;
+  padding: 10px 16px;
   border-radius: 25px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s;
+  min-height: 44px; /* Touch target */
 }
 
 .column-toggle-btn:hover {
@@ -441,11 +191,11 @@ h1 {
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 10px;
+  margin-top: 8px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  padding: 15px;
+  padding: 12px;
   min-width: 200px;
   z-index: 100;
 }
@@ -458,10 +208,11 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px;
+  padding: 10px 8px;
   cursor: pointer;
   border-radius: 5px;
   transition: background 0.2s;
+  min-height: 44px; /* Touch target */
 }
 
 .column-option:hover {
@@ -470,6 +221,8 @@ h1 {
 
 .column-option input {
   cursor: pointer;
+  width: 18px;
+  height: 18px;
 }
 
 .column-option span {
@@ -477,30 +230,113 @@ h1 {
   color: #333;
 }
 
-/* Table Styles */
-.table-container {
-  max-width: 1400px;
+/* =============================================
+   CARDS VIEW (Mobile-first)
+   ============================================= */
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
   margin: 0 auto;
-  padding: 0 20px;
+}
+
+.pokemon-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 3px solid;
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  padding: 8px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.strength-badge {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.card-image {
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 160px;
+}
+
+.card-image img {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.pokemon-card:hover .card-image img {
+  transform: scale(1.1);
+}
+
+.card-body {
+  padding: 14px;
+  text-align: center;
+  background: white;
+}
+
+.pokemon-name {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* =============================================
+   TABLE VIEW (Mobile-first: stacked card layout)
+   ============================================= */
+
+.table-container {
+  margin: 0 auto;
+  padding: 0;
 }
 
 .table-wrapper {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile: horizontal scroll for table */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pokemon-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
+  min-width: 600px;
 }
 
 .table-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 15px 10px;
+  padding: 10px 8px;
   text-align: left;
   font-weight: 600;
   position: relative;
@@ -520,7 +356,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 6px;
 }
 
 .header-label {
@@ -556,10 +392,10 @@ h1 {
 .actions-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 15px 10px;
+  padding: 10px 8px;
   text-align: center;
   font-weight: 600;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .table-row {
@@ -575,7 +411,7 @@ h1 {
 }
 
 .table-cell {
-  padding: 15px 10px;
+  padding: 10px 8px;
   border-bottom: 1px solid #e0e0e0;
   vertical-align: top;
 }
@@ -583,34 +419,35 @@ h1 {
 .strength-cell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .strength-badge-table {
   display: inline-block;
   color: white;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 15px;
   font-weight: bold;
-  font-size: 0.9rem;
-  min-width: 40px;
+  font-size: 0.85rem;
+  min-width: 36px;
   text-align: center;
 }
 
 .strength-label-table {
   color: #666;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-style: italic;
 }
 
 .array-cell {
   display: block;
-  line-height: 1.6;
+  line-height: 1.5;
   color: #555;
+  font-size: 0.85rem;
 }
 
 .actions-cell {
-  padding: 15px 10px;
+  padding: 10px 8px;
   border-bottom: 1px solid #e0e0e0;
   text-align: center;
 }
@@ -619,11 +456,12 @@ h1 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 16px;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s;
+  min-height: 36px;
 }
 
 .view-btn:hover {
@@ -633,102 +471,291 @@ h1 {
 
 .no-results {
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px 16px;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .no-results p {
   margin: 0;
   background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 15px;
+  padding: 20px;
+  border-radius: 12px;
   display: inline-block;
 }
 
-/* Responsive table */
-@media (max-width: 1200px) {
-  .table-wrapper {
-    overflow-x: auto;
-  }
+/* =============================================
+   DETAIL PANEL (Mobile-first: full screen)
+   ============================================= */
 
-  .pokemon-table {
-    min-width: 900px;
+.detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding: 0;
+  animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.detail-panel {
+  background: white;
+  border-radius: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  box-shadow: none;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-@media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-box {
-    min-width: 100%;
-  }
-
-  .view-controls {
-    justify-content: center;
-  }
-
-  .pokemon-table {
-    font-size: 0.85rem;
-  }
-
-  .table-cell,
-  .table-header {
-    padding: 10px 8px;
-  }
-}
-
-/* Create Button */
-.create-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 12px 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s, transform 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.detail-header {
+  padding: 24px 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.detail-image {
+  flex-shrink: 0;
+}
+
+.detail-image img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+}
+
+.detail-title {
+  flex: 1;
+}
+
+.detail-title h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.75rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.strength-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.strength-value {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.strength-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.detail-content {
+  padding: 20px 16px;
+}
+
+.detail-section {
+  margin-bottom: 24px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-section h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.explanation {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+.powers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.power-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.power-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.tips-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tips-list li {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.tips-list li:last-child {
+  margin-bottom: 0;
+}
+
+.tips-list li::marker {
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* --- Detail Actions --- */
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 14px 24px;
+  border: none;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.2s;
+  min-height: 48px; /* Touch-friendly */
+  text-align: center;
 }
 
-.create-btn:hover {
+.edit-btn {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.edit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
 }
 
-/* Create Modal */
+.delete-btn {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
+}
+
+/* =============================================
+   CREATE / EDIT MODAL (Mobile-first: full screen)
+   ============================================= */
+
 .create-modal {
   background: white;
-  border-radius: 20px;
-  padding: 40px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 90vh;
+  border-radius: 0;
+  padding: 20px 16px;
+  width: 100%;
+  min-height: 100vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 .modal-header {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .modal-header h2 {
   color: #333;
-  margin: 0 0 10px 0;
-  font-size: 1.8rem;
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
 }
 
 .modal-subtitle {
   color: #666;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-style: italic;
 }
 
@@ -736,34 +763,35 @@ h1 {
   color: #333;
 }
 
-/* Form Styles */
+/* --- Form Styles --- */
 .create-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .form-group label {
   font-weight: 600;
   color: #333;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .form-input,
 .form-textarea {
-  padding: 12px 16px;
+  padding: 12px 14px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 16px; /* Prevents iOS zoom */
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
   color: #333;
+  min-height: 44px; /* Touch-friendly */
 }
 
 .form-input:focus,
@@ -783,39 +811,41 @@ h1 {
   min-height: 80px;
 }
 
-/* Array Input */
+/* --- Array Input --- */
 .array-input {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .array-input .form-input {
   flex: 1;
+  min-width: 0; /* Prevent overflow in flex */
 }
 
 .add-btn {
   background: #4CAF50;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 16px;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
   white-space: nowrap;
+  min-height: 44px; /* Touch-friendly */
 }
 
 .add-btn:hover {
   background: #45a049;
 }
 
-/* Tags Container */
+/* --- Tags Container --- */
 .tags-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 8px;
   padding: 10px;
   background: #f8f9fa;
   border-radius: 8px;
@@ -826,24 +856,24 @@ h1 {
   color: white;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .tag-remove {
   background: rgba(255, 255, 255, 0.3);
   border: none;
   color: white;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1;
   padding: 0;
   transition: background 0.2s;
@@ -853,25 +883,27 @@ h1 {
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Form Actions */
+/* --- Form Actions --- */
 .form-actions {
   display: flex;
-  gap: 15px;
-  justify-content: flex-end;
-  margin-top: 30px;
-  padding-top: 20px;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
   border-top: 2px solid #f0f0f0;
 }
 
 .cancel-btn,
 .submit-btn {
-  padding: 12px 30px;
+  padding: 14px 24px;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 48px; /* Touch-friendly */
+  text-align: center;
 }
 
 .cancel-btn {
@@ -895,47 +927,523 @@ h1 {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-/* Detail Actions */
-.detail-actions {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 2px solid rgba(255, 255, 255, 0.2);
+
+/* =============================================
+   BREAKPOINT: 480px (Larger mobile phones)
+   ============================================= */
+@media (min-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .card-image {
+    min-height: 180px;
+    padding: 20px;
+  }
+
+  .card-image img {
+    max-width: 150px;
+  }
+
+  .detail-header {
+    padding: 28px 20px;
+  }
+
+  .detail-image img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .detail-title h2 {
+    font-size: 2rem;
+  }
+
+  .detail-content {
+    padding: 24px 20px;
+  }
+
+  .detail-actions {
+    flex-direction: row;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+  }
+
+  .form-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    flex: unset;
+  }
+
+  .create-modal {
+    padding: 24px 20px;
+  }
 }
 
-.edit-btn,
-.delete-btn {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  flex: 1;
-  max-width: 200px;
+
+/* =============================================
+   BREAKPOINT: 768px (Tablets)
+   ============================================= */
+@media (min-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  /* Controls: horizontal layout */
+  .controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    max-width: 1400px;
+    padding: 0 20px;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .search-input {
+    padding: 15px 50px 15px 20px;
+  }
+
+  .toggle-btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+
+  .create-btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+
+  /* Cards: 2-3 columns */
+  .pokemon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+  }
+
+  .pokemon-card {
+    border-radius: 15px;
+    border-width: 4px;
+  }
+
+  .card-image {
+    min-height: 180px;
+  }
+
+  .card-image img {
+    max-width: 160px;
+  }
+
+  .pokemon-name {
+    font-size: 1.35rem;
+  }
+
+  /* Table: visible with scroll */
+  .table-container {
+    padding: 0 20px;
+    max-width: 1400px;
+  }
+
+  .table-wrapper {
+    border-radius: 15px;
+  }
+
+  .pokemon-table {
+    font-size: 0.9rem;
+    min-width: 700px;
+  }
+
+  .table-header {
+    padding: 12px 10px;
+  }
+
+  .table-cell {
+    padding: 12px 10px;
+  }
+
+  /* Detail panel: modal style */
+  .detail-overlay {
+    padding: 20px;
+    align-items: center;
+  }
+
+  .detail-panel {
+    border-radius: 20px;
+    max-width: 700px;
+    min-height: unset;
+    max-height: 90vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .detail-header {
+    flex-direction: row;
+    text-align: left;
+    padding: 32px;
+    gap: 24px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .detail-image img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .detail-title h2 {
+    font-size: 2.5rem;
+  }
+
+  .strength-indicator {
+    justify-content: flex-start;
+  }
+
+  .strength-value {
+    font-size: 1.75rem;
+    padding: 10px 18px;
+  }
+
+  .strength-text {
+    font-size: 1.2rem;
+  }
+
+  .detail-content {
+    padding: 32px;
+  }
+
+  .detail-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .explanation {
+    font-size: 1.05rem;
+  }
+
+  .power-badge {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .tips-list li {
+    font-size: 1rem;
+  }
+
+  /* Create/Edit modal: centered modal */
+  .create-modal {
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 600px;
+    width: 90%;
+    min-height: unset;
+    max-height: 90vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .close-btn {
+    top: 15px;
+    right: 15px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    max-width: 200px;
+  }
 }
 
-.edit-btn {
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+
+/* =============================================
+   BREAKPOINT: 1024px (Laptops / small desktops)
+   ============================================= */
+@media (min-width: 1024px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .header {
+    margin-bottom: 44px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .controls {
+    gap: 20px;
+  }
+
+  .search-box {
+    min-width: 300px;
+  }
+
+  .toggle-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  .create-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  /* Cards: auto-fill with wider min */
+  .pokemon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .card-image {
+    padding: 20px;
+    min-height: 200px;
+  }
+
+  .card-image img {
+    max-width: 180px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .pokemon-name {
+    font-size: 1.5rem;
+  }
+
+  /* Table: full featured */
+  .pokemon-table {
+    font-size: 0.95rem;
+    min-width: 900px;
+  }
+
+  .table-header {
+    padding: 15px 10px;
+  }
+
+  .table-cell {
+    padding: 15px 10px;
+  }
+
+  .actions-header {
+    padding: 15px 10px;
+    min-width: 100px;
+  }
+
+  .strength-badge-table {
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    min-width: 40px;
+  }
+
+  .strength-label-table {
+    font-size: 0.85rem;
+  }
+
+  .array-cell {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .view-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Detail panel */
+  .detail-panel {
+    max-width: 800px;
+  }
+
+  .detail-header {
+    padding: 40px;
+    gap: 30px;
+  }
+
+  .detail-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .detail-title h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .strength-value {
+    font-size: 2rem;
+    padding: 10px 20px;
+  }
+
+  .strength-text {
+    font-size: 1.3rem;
+  }
+
+  .detail-content {
+    padding: 40px;
+  }
+
+  .detail-section {
+    margin-bottom: 30px;
+  }
+
+  .detail-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  .explanation {
+    font-size: 1.1rem;
+  }
+
+  .power-badge {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .tips-list {
+    padding-left: 25px;
+  }
+
+  .tips-list li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .detail-actions {
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  /* Create/Edit modal */
+  .create-modal {
+    padding: 40px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
+
+  .create-form {
+    gap: 20px;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  .form-actions {
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    padding: 12px 30px;
+  }
 }
 
-.edit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+
+/* =============================================
+   BREAKPOINT: 1400px (Large desktops)
+   ============================================= */
+@media (min-width: 1400px) {
+  .header {
+    margin-bottom: 50px;
+  }
+
+  .pokemon-grid {
+    max-width: 1400px;
+  }
+
+  .table-container {
+    max-width: 1400px;
+  }
+
+  .controls {
+    max-width: 1400px;
+  }
+
+  .card-header {
+    padding: 10px;
+  }
+
+  .strength-badge {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+  }
+
+  /* Table full width */
+  .table-wrapper {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .no-results {
+    padding: 60px 20px;
+    font-size: 1.2rem;
+  }
+
+  .no-results p {
+    padding: 30px;
+    border-radius: 15px;
+  }
 }
 
-.delete-btn {
-  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
-}
 
-.delete-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
+/* =============================================
+   UTILITY: Smooth scroll for iOS
+   ============================================= */
+@supports (-webkit-touch-callout: none) {
+  .detail-panel,
+  .create-modal {
+    -webkit-overflow-scrolling: touch;
+  }
 }
