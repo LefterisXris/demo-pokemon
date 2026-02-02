@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Pikachu",
+    "explanation": "Derived from 'pika' (the sound of electricity) and 'chu' (the sound a mouse makes)",
+    "strength": 85,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+    "powers": ["Thunder Shock", "Quick Attack", "Electro Ball", "Iron Tail"],
+    "tips": ["Use ground-type moves", "Lower its speed first", "Great Ball recommended", "Paralysis helps capture"]
+  },
+  {
+    "id": 2,
+    "name": "Charizard",
+    "explanation": "Combination of 'char' (to burn) and 'lizard'",
+    "strength": 95,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+    "powers": ["Flamethrower", "Dragon Claw", "Air Slash", "Fire Blast"],
+    "tips": ["Use water or rock type moves", "Ultra Ball highly recommended", "Watch out for powerful fire attacks", "Best caught at dusk"]
+  },
+  {
+    "id": 3,
+    "name": "Blastoise",
+    "explanation": "Combination of 'blast' and 'tortoise'",
+    "strength": 92,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+    "powers": ["Hydro Pump", "Ice Beam", "Skull Bash", "Water Gun"],
+    "tips": ["Electric or grass moves are effective", "Use Ultra Ball", "Weaken it significantly first", "Morning time is best"]
+  },
+  {
+    "id": 4,
+    "name": "Bulbasaur",
+    "explanation": "Combination of 'bulb' and 'dinosaur'",
+    "strength": 70,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    "powers": ["Vine Whip", "Razor Leaf", "Solar Beam", "Sleep Powder"],
+    "tips": ["Fire or flying type moves work well", "Great Ball should suffice", "Status effects help", "Found in grassy areas"]
+  },
+  {
+    "id": 5,
+    "name": "Mewtwo",
+    "explanation": "Combination of 'mew' (cat sound) and 'two' (second clone)",
+    "strength": 100,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
+    "powers": ["Psystrike", "Shadow Ball", "Aura Sphere", "Psychic"],
+    "tips": ["Master Ball strongly recommended", "Dark type moves are effective", "Extremely difficult to catch", "Save before attempting"]
+  },
+  {
+    "id": 6,
+    "name": "Gyarados",
+    "explanation": "Possibly from 'gyaku' (cruel) and 'dos' (two), or based on destruction",
+    "strength": 90,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png",
+    "powers": ["Hydro Pump", "Dragon Dance", "Earthquake", "Ice Fang"],
+    "tips": ["Electric moves are super effective", "Ultra Ball required", "Reduce HP to red zone", "Be patient, it's aggressive"]
+  },
+  {
+    "id": 7,
+    "name": "Dragonite",
+    "explanation": "Combination of 'dragon' and 'knight'",
+    "strength": 96,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
+    "powers": ["Dragon Rush", "Outrage", "Hurricane", "Fire Punch"],
+    "tips": ["Ice type moves are very effective", "Ultra Ball minimum", "Sleep or paralysis recommended", "Stock up on healing items"]
+  },
+  {
+    "id": 8,
+    "name": "Eevee",
+    "explanation": "Derived from 'evolution' representing its evolutionary versatility",
+    "strength": 65,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+    "powers": ["Quick Attack", "Bite", "Swift", "Take Down"],
+    "tips": ["Fighting moves work well", "Great Ball is enough", "Easy to catch", "Found in various locations"]
+  },
+  {
+    "id": 9,
+    "name": "Gengar",
+    "explanation": "Possibly from 'doppelgänger' (ghostly double)",
+    "strength": 88,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+    "powers": ["Shadow Ball", "Sludge Bomb", "Dream Eater", "Hypnosis"],
+    "tips": ["Psychic or ground moves recommended", "Ultra Ball suggested", "Night time is best", "Immune to normal moves"]
+  },
+  {
+    "id": 10,
+    "name": "Snorlax",
+    "explanation": "Combination of 'snore' and 'relax'",
+    "strength": 82,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png",
+    "powers": ["Body Slam", "Rest", "Crunch", "Hyper Beam"],
+    "tips": ["Fighting moves are effective", "Use Ultra Ball", "Wake it up with Poke Flute", "Very high HP, be patient"]
+  },
+  {
+    "id": 11,
+    "name": "Alakazam",
+    "explanation": "Based on 'abracadabra' and 'Alakazam' (magic words)",
+    "strength": 83,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png",
+    "powers": ["Psychic", "Future Sight", "Shadow Ball", "Focus Blast"],
+    "tips": ["Dark or bug type moves", "Ultra Ball recommended", "High special defense needed", "Very low physical defense"]
+  },
+  {
+    "id": 12,
+    "name": "Machamp",
+    "explanation": "Combination of 'macho' and 'champion'",
+    "strength": 86,
+    "picture": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png",
+    "powers": ["Dynamic Punch", "Cross Chop", "Stone Edge", "Earthquake"],
+    "tips": ["Psychic or flying moves work best", "Ultra Ball needed", "Watch for powerful punches", "Best caught with status effect"]
+  }
+]

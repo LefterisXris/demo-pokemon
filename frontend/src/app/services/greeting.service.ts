@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 export interface GreetingResponse {
   name: string;
@@ -23,6 +23,7 @@ export interface Pokemon {
 export class GreetingService {
   private greetingUrl = '/api/greeting';
   private pokemonUrl = '/api/pokemons';
+  private staticDataUrl = 'data/pokemons.json';
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +32,9 @@ export class GreetingService {
   }
 
   getPokemons(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.pokemonUrl);
+    return this.http.get<Pokemon[]>(this.pokemonUrl).pipe(
+      catchError(() => this.http.get<Pokemon[]>(this.staticDataUrl))
+    );
   }
 
   createPokemon(pokemon: Partial<Pokemon>): Observable<Pokemon> {
